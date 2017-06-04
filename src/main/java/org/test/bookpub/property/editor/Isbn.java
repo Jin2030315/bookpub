@@ -1,4 +1,4 @@
-package org.test.book.pub.property.editor;
+package org.test.bookpub.property.editor;
 
 /**
  * Created by jin80 on 6/2/2017.

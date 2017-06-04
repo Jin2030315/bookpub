@@ -1,4 +1,4 @@
-package org.test.book.pub.property.editor;
+package org.test.bookpub.property.editor;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;

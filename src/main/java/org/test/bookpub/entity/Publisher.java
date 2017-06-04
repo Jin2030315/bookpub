@@ -1,6 +1,4 @@
-package org.test.book.pub.entity;
-
-import org.test.book.pub.entity.Book;
+package org.test.bookpub.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +9,8 @@ import java.util.List;
 /**
  * Created by jin80 on 6/1/2017.
  */
-
 @Entity
 public class Publisher {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -22,9 +18,25 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
-    protected Publisher(){}
+    protected Publisher() {}
 
-    public Publisher(String name){
+    public Publisher(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }

@@ -1,24 +1,28 @@
-package org.test.book.pub.entity;
+package org.test.bookpub.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * Created by jin80 on 6/1/2017.
  */
 
 @Entity
-public class Reviewer {
+public class Author {
     @Id
     @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
 
-    protected Reviewer(){}
+    protected Author() {}
 
-    public Reviewer(String firstName,String lastName){
+    public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
