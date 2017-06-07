@@ -7,13 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.test.bookpub.formatters.BookFormatter;
 import org.test.bookpub.repository.BookRepository;
 
 /**
- * Created by jin80 on 6/2/2017.
+ * Created by zhengjun.jing on 6/2/2017.
  */
 
 
@@ -34,7 +36,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-    //@Bean
+    @Bean
     public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
         return new ByteArrayHttpMessageConverter();
     }
@@ -45,10 +47,25 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         registry.addFormatter(new BookFormatter(bookRepository));
     }
 
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer){
+        configurer.setUseSuffixPatternMatch(false).
+                setUseTrailingSlashMatch(true);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/internal/**")
+                .addResourceLocations("classpath:/");
+    }
+
+
+
 //    This code is commented out because it was used only as an example, but actually breaks the data rendering.
 //    @Override
 //    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 //        converters.clear();
 //        converters.add(new ByteArrayHttpMessageConverter());
 //    }
+
 }
